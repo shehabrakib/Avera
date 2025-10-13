@@ -1,5 +1,6 @@
 import Hero from "../components/layout/Hero"
 import FeaturedCollection from "../components/products/FeaturedCollection"
+import FeaturedSection from "../components/products/FeaturedSection"
 import GenderCollectionSection from "../components/products/GenderCollectionSection"
 import NewArrivals from "../components/products/NewArrivals"
 import ProductDetails from "../components/products/ProductDetails"
@@ -79,6 +80,7 @@ const Home = () => {
         <ProductGrid products={placeholderProducts}/>
       </div>
       <FeaturedCollection/>
+      <FeaturedSection/>
     </div>
   )
 }

@@ -21,8 +21,6 @@ const FilterSideBar = () => {
   const materials = ["Cotton", "Wool", "Denim", "Silk"]
   const brands = ["Urban Threads", "Xaraa", "Fashionly", "ChicStyle"]
   const genders = ["Women", "Men"]
-  const maxPrice = 100
-  const minPrice = 0
 
   useEffect(() => {
     const params = Object.fromEntries([...searchParams])

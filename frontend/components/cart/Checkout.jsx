@@ -40,7 +40,7 @@ const Checkout = () => {
     const handleCreatedCheckout = (e) => {
 
         e.preventDefault()
-        // setCheckoutId(1234)
+        setCheckoutId(1234)
     }
     const handlePaymentSuccess = (details) => {
         console.log("Payment SuccessFull", details)
@@ -111,10 +111,10 @@ const Checkout = () => {
                             <label className="block text-gray-700">City</label>
                             <input
                                 type="text"
-                                value={shippingAddress.City}
+                                value={shippingAddress.city}
                                 onChange={(e) => {
                                     setShippingAddress({
-                                        ...shippingAddress, City: e.target.value
+                                        ...shippingAddress, city: e.target.value
                                     })
                                 }}
                                 className="w-full p-2 border rounded"

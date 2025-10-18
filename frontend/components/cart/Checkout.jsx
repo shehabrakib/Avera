@@ -44,7 +44,7 @@ const Checkout = () => {
     }
     const handlePaymentSuccess = (details) => {
         console.log("Payment SuccessFull", details)
-        navigate("/order-confirmation")
+        navigate("order-confirmation")
     }
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto py-10 px-6

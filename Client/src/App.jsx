@@ -38,7 +38,7 @@ const App = () => {
           <Route index element={<AdminHomePage/>}/>
           <Route path='users' element={<UserManagement/>}/>
           <Route path='products' element={<ProductManagement/>}/>
-          <Route path='edit' element={<EditProductPage/>}/>
+          <Route path='products/:id/edit' element={<EditProductPage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -107,12 +107,26 @@ router.put("/:id", protect, admin, async (req, res) => {
       product.weight = weight || product.weight;
       product.sku = sku || product.sku;
 
-
-      const updatedProduct =  await product.save();
+      const updatedProduct = await product.save();
       res.json(updatedProduct);
+    } else {
+      res.status(404).json({ message: "Product not found" });
     }
-    else{
-      res.status(404).json({message: "Product not found"});
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.delete("/:id", protect, admin, async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+
+    if (product) {
+      await product.deleteOne();
+      res.json({ message: "Product Removed" });
+    } else {
+      res.status(404).json({ message: "Product not found" });
     }
   } catch (error) {
     console.log(error);

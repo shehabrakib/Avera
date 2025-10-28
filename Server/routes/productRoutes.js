@@ -1,10 +1,10 @@
 import express from "express";
 import Product from "../models/Products.js";
-import protect from "../middleware/authMiddleware.js";
+import { protect, admin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", protect, async (req, res) => {
+router.post("/", protect, admin, async (req, res) => {
   try {
     const {
       name,

@@ -138,8 +138,7 @@ router.delete("/", async (req, res) => {
       );
       await cart.save();
       return res.status(200).json(cart);
-    }
-    else{
+    } else {
       return res.status(404).json({ message: "Product not found in cart" });
     }
   } catch (error) {
@@ -149,5 +148,18 @@ router.delete("/", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-})
+  const { userId, guestId} = req.query;
+
+  try{
+    const cart = await getCart(userId, guestId);
+    if(cart){
+      res.json(cart);
+    }else{
+      res.status(404).json({message: "Cart not found"});
+    }
+  }catch(error){
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
 export default router;

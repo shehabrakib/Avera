@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const subscriberSchema = new mongoose.Schema({
     email: {
-        type: required,
+        type: String,
         required: true,
         unique: true,
         trim: true,
@@ -15,3 +15,4 @@ const subscriberSchema = new mongoose.Schema({
 });
 
 const Subscriber = mongoose.model("Subscriber", subscriberSchema);
+export default Subscriber;

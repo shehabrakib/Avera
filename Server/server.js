@@ -10,6 +10,7 @@ import orderRoutes from "./routes/orderRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 import subscriberRoutes from "./routes/subscribeRoutes.js"
 import adminRoutes from "./routes/adminRoutes.js";
+import productAdminRoutes from "./routes/productAdminRoutes.js";
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -38,6 +39,7 @@ app.use("/api", subscriberRoutes);
 
 // admin
 app.use("/api/admin/users", adminRoutes);
+app.use("/api/admin/products", productAdminRoutes);
 
 app.listen(PORT, ()=>{
     console.log(`Server is running on http://localhost:${PORT}`)

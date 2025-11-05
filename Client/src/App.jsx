@@ -2,7 +2,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import UserLayout from '../components/layout/UserLayout'
 import Home from '../pages/Home'
 import {Toaster} from "sonner"
-import Login from '../pages/login'
+import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Profile from '../pages/Profile'
 import CollectionPage from '../pages/CollectionPage'

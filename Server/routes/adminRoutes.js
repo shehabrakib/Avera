@@ -41,7 +41,7 @@ router.put("/:id", protect, admin, async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
       user.name = req.body.name || user.name;
-      user.enail = req.body.email || user.email;
+      user.email = req.body.email || user.email;
       user.role = req.body.role || user.role;
     }
     const uploadUser = await user.save();

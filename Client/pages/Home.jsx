@@ -78,6 +78,7 @@ const Home = () => {
     dispatch(fetchProductsByFilters({
       gender: "Men",
       category: "Bottom Wear",
+      limit: 8,
     }))
 
     //fetch best seller product

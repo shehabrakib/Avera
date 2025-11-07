@@ -6,57 +6,57 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchProductDetails, fetchSimilarProducts } from "../../src/redux/slices/productsSlice"
 import { addToCart } from "../../src/redux/slices/cartSlice"
 
-const selectedProduct = {
-    name: "Stylish Jacket",
-    price: 120,
-    originalPrice: 150,
-    description: "This is a stylish Jacket perfect for any occasion",
-    brand: "Fashion Brand",
-    material: "Leather",
-    sizes: ["S", "M", "L", "XL"],
-    colors: ["Red", "Black"],
-    images: [
-        {
-            url: "https://picsum.photos/500/500?random=1",
-            altText: "Stylish Jacket 1",
-        },
-        {
-            url: "https://picsum.photos/500/500?random=2",
-            altText: "Stylish Jacket 2",
-        }
-    ]
+// const selectedProduct = {
+//     name: "Stylish Jacket",
+//     price: 120,
+//     originalPrice: 150,
+//     description: "This is a stylish Jacket perfect for any occasion",
+//     brand: "Fashion Brand",
+//     material: "Leather",
+//     sizes: ["S", "M", "L", "XL"],
+//     colors: ["Red", "Black"],
+//     images: [
+//         {
+//             url: "https://picsum.photos/500/500?random=1",
+//             altText: "Stylish Jacket 1",
+//         },
+//         {
+//             url: "https://picsum.photos/500/500?random=2",
+//             altText: "Stylish Jacket 2",
+//         }
+//     ]
 
-}
-const similarProducts = [
-    {
-        _id: 1,
-        name: "Product 1",
-        price: 100,
-        images: [{ url: "https://picsum.photos/500/500?random=1" }],
+// }
+// const similarProducts = [
+//     {
+//         _id: 1,
+//         name: "Product 1",
+//         price: 100,
+//         images: [{ url: "https://picsum.photos/500/500?random=1" }],
 
-    },
-    {
-        _id: 2,
-        name: "Product 2",
-        price: 100,
-        images: [{ url: "https://picsum.photos/500/500?random=2" }],
+//     },
+//     {
+//         _id: 2,
+//         name: "Product 2",
+//         price: 100,
+//         images: [{ url: "https://picsum.photos/500/500?random=2" }],
 
-    },
-    {
-        _id: 3,
-        name: "Product 3",
-        price: 100,
-        images: [{ url: "https://picsum.photos/500/500?random=3" }],
+//     },
+//     {
+//         _id: 3,
+//         name: "Product 3",
+//         price: 100,
+//         images: [{ url: "https://picsum.photos/500/500?random=3" }],
 
-    },
-    {
-        _id: 4,
-        name: "Product 4",
-        price: 100,
-        images: [{ url: "https://picsum.photos/500/500?random=4" }],
+//     },
+//     {
+//         _id: 4,
+//         name: "Product 4",
+//         price: 100,
+//         images: [{ url: "https://picsum.photos/500/500?random=4" }],
 
-    },
-]
+//     },
+// ]
 
 const ProductDetails = ({productId}) => {
     const{id} = useParams()
@@ -70,7 +70,6 @@ const ProductDetails = ({productId}) => {
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     
     const productFetchId = productId || id
-    
     useEffect(()=>{
         if(productFetchId){
             dispatch(fetchProductDetails(productFetchId))
@@ -126,9 +125,16 @@ const ProductDetails = ({productId}) => {
             setIsButtonDisabled(false)
         })
     }
+    if(loading){
+        return <p>Loading...</p>
+    }
+    if(error){
+        return <p>Error: {error}</p>
+    }
 
     return (
         <div className="p-6">
+          {selectedProduct && (
             <div className="max-w-6xl mx-auto bg-white p-8 rounded-lg">
                 <div className="flex flex-col md:flex-row">
                     {/* left thumnail */}
@@ -256,9 +262,10 @@ const ProductDetails = ({productId}) => {
                     <h2 className="text-2xl text-center font-medium mb-4">
                         You May Also Like
                     </h2>
-                    <ProductGrid products={similarProducts} />
+                    <ProductGrid products={similarProducts} loading={loading} error={error}/>
                 </div>
             </div>
+          )}
         </div>
     )
 }

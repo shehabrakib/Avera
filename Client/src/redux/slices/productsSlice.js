@@ -43,9 +43,9 @@ export const fetchProductsByFilters = createAsyncThunk(
 //async Thunk to fetch product details by ID
 export const fetchProductDetails = createAsyncThunk(
     "products/fetchProductDetails",
-    async(Id) => {
+    async(id) => {
         const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}/api/products/${Id}`
+            `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`
         )
         return response.data
     }
@@ -54,9 +54,9 @@ export const fetchProductDetails = createAsyncThunk(
 //async thunk to update products
 export const updateProduct = createAsyncThunk(
     "products/updateProduct",
-    async({Id, productData}) => {
+    async({id, productData}) => {
         const response = await axios.put(
-            `${import.meta.env.VITE_BACKEND_URL}/api/products/${Id}`,
+            `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`,
             productData,{
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("userToken")}`,

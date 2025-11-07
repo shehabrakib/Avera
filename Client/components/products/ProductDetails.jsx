@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import ProductGrid from "./ProductGrid"
+import { useParams } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchProductDetails, fetchSimilarProducts } from "../../src/redux/slices/productsSlice"
+import { addToCart } from "../../src/redux/slices/cartSlice"
 
 const selectedProduct = {
     name: "Stylish Jacket",
@@ -54,12 +58,26 @@ const similarProducts = [
     },
 ]
 
-const ProductDetails = () => {
+const ProductDetails = ({productId}) => {
+    const{id} = useParams()
+    const dispatch = useDispatch()
+    const {selectedProduct, loading, error, similarProducts} = useSelector((state)=> state.products)
+    const {user, guestId} = useSelector((state) => state.auth)
     const [mainImage, setMainImage] = useState("")
     const [selectedSize, setSelectedSize] = useState("")
     const [selectedColor, setSelectedColor] = useState("")
     const [quantity, setQuantity] = useState(1)
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+    
+    const productFetchId = productId || id
+    
+    useEffect(()=>{
+        if(productFetchId){
+            dispatch(fetchProductDetails(productFetchId))
+            dispatch(fetchSimilarProducts({id: productFetchId}))
+        }
+    }, [dispatch, productFetchId])
+
     useEffect(() => {
         if (selectedProduct?.images?.length > 0) {
             setMainImage(selectedProduct.images[0].url)
@@ -79,12 +97,34 @@ const ProductDetails = () => {
         }
         setIsButtonDisabled(true)
 
-        setTimeout(() => {
-            toast.success("Product is added to cart", {
+        // setTimeout(() => {
+        //     toast.success("Product is added to cart", {
+        //         duration: 1000,
+        //     })
+        //     setIsButtonDisabled(false)
+        // }, 500)
+
+        dispatch(
+            addToCart(
+                {
+                    productId : productFetchId,
+                    quantity,
+                    size: selectedSize,
+                    color: selectedColor,
+                    guestId,
+                    userId: user?._id,
+
+                }
+            )
+        )
+        .then(()=>{
+            toast.success("Product added to cart!"),{
                 duration: 1000,
-            })
+            }
+        })
+        .finally(()=>{
             setIsButtonDisabled(false)
-        }, 500)
+        })
     }
 
     return (

@@ -58,7 +58,7 @@ export const updateCartItem = createAsyncThunk(
     async({userId, guestId, productId, quantity, size, color}, {rejectWithValue}) => {
         try {
             const response = await axios.put(
-                `${import.meta.env.VITE_BACKEND_URL}/api/cart/`,{
+                `${import.meta.env.VITE_BACKEND_URL}/api/carts/`,{
                     userId,
                     guestId,
                     productId, 
@@ -81,7 +81,7 @@ export const removeFromCart = createAsyncThunk(
     async({userId, guestId, productId, size, color}, {rejectWithValue}) => {    
         try {
             const response = await axios.delete(
-                `${import.meta.env.VITE_BACKEND_URL}/api/cart/`,{
+                `${import.meta.env.VITE_BACKEND_URL}/api/carts/`,{
                     data: {
                         userId,
                         guestId,
@@ -105,7 +105,7 @@ export const mergeCart = createAsyncThunk(
     async({user, guestId}, {rejectWithValue}) => {
         try {
             const response = await axios.post(
-                `${import.meta.env.VITE_BACKEND_URL}/api/cart/merge`,{
+                `${import.meta.env.VITE_BACKEND_URL}/api/carts/merge`,{
                     user,guestId
                 },{
                     headers: {

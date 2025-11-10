@@ -6,9 +6,10 @@ const router = express.Router();
 
 router.get("/my-orders", protect, async (req, res) => {
   try {
-    const orders = (await Order.find({ user: req.user._id })).sort({
+    const orders = await Order.find({ user: req.user._id }).sort({
       createdAt: -1,
     });
+    console.log(orders)
     res.json(orders);
   } catch (error) {
     console.error(error);

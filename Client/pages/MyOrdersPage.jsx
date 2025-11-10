@@ -1,47 +1,62 @@
-import { useEffect, useState } from "react"
+import { useEffect} from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { fetchOrders } from "../src/redux/slices/orderSlice"
 
 const MyOrdersPage = () => {
-    const [orders, setOrders] = useState([])
+    // const [orders, setOrders] = useState([])
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const {orders, loading,  error} = useSelector((state)=>state.orders)
 
-    useEffect(() => {
-        setTimeout(() => {
-            const mockOrders = [
-                {
-                    _id: "12345",
-                    createdAt: new Date(),
-                    shippingAddress: { city: "New York", country: "USA" },
-                    orderItems: [
-                        {
-                            name: "Product 1",
-                            image: "https://picsum.photos/500/500?random=1",
-                        }
+    useEffect(()=>{
+        dispatch(fetchOrders())
 
-                    ],
-                    totalPrice: 100,
-                    isPaid: true,
-                },
-                {
-                    _id: "12346",
-                    createdAt: new Date(),
-                    shippingAddress: { city: "New York", country: "USA" },
-                    orderItems: [
-                        {
-                            name: "Product 2",
-                            image: "https://picsum.photos/500/500?random=2",
-                        }
+    },[dispatch])
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         const mockOrders = [
+    //             {
+    //                 _id: "12345",
+    //                 createdAt: new Date(),
+    //                 shippingAddress: { city: "New York", country: "USA" },
+    //                 orderItems: [
+    //                     {
+    //                         name: "Product 1",
+    //                         image: "https://picsum.photos/500/500?random=1",
+    //                     }
 
-                    ],
-                    totalPrice: 100,
-                    isPaid: false,
-                },
-            ]
-            setOrders(mockOrders)
-        }, 1000)
-    }, [])
+    //                 ],
+    //                 totalPrice: 100,
+    //                 isPaid: true,
+    //             },
+    //             {
+    //                 _id: "12346",
+    //                 createdAt: new Date(),
+    //                 shippingAddress: { city: "New York", country: "USA" },
+    //                 orderItems: [
+    //                     {
+    //                         name: "Product 2",
+    //                         image: "https://picsum.photos/500/500?random=2",
+    //                     }
+
+    //                 ],
+    //                 totalPrice: 100,
+    //                 isPaid: false,
+    //             },
+    //         ]
+    //         setOrders(mockOrders)
+    //     }, 1000)
+    // }, [])
     const handleRowClick = (orderId) =>{
         navigate(`/order/${orderId}`)
+    }
+
+    if(loading){
+        return <p>Loading...</p>
+    }
+    if(error){
+        return <p>Error: {error}</p>
     }
 
     return (
@@ -61,7 +76,7 @@ const MyOrdersPage = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.length > 0 ? (orders.map((order) => (
+                        {orders?.length > 0 ? (orders.map((order) => (
                             <tr key={order._id} 
                             onClick={()=>handleRowClick(order._id)}
                             className="border-b hover:border-gray-50 cursor-pointer">
@@ -85,7 +100,7 @@ const MyOrdersPage = () => {
                                     {order.orderItems.length}
                                 </td>
                                 <td className="py-2 px-2 sm:py-4 sm:px-4">
-                                    ${order.totalPrice}
+                                    ${order.totalPrice.toFixed(2)}
                                 </td>
                                 <td className="py-2 px-2 sm:py-4 sm:px-4">
                                     <span 

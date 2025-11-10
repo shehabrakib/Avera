@@ -51,7 +51,6 @@ const MyOrdersPage = () => {
     const handleRowClick = (orderId) =>{
         navigate(`/order/${orderId}`)
     }
-
     if(loading){
         return <p>Loading...</p>
     }
@@ -81,7 +80,7 @@ const MyOrdersPage = () => {
                             onClick={()=>handleRowClick(order._id)}
                             className="border-b hover:border-gray-50 cursor-pointer">
                                 <td className="py-2 px-2 sm:py-4 sm:px-4">
-                                    <img src={order.orderItems[0].image} alt={order.orderItems[0].name}
+                                    <img src={order.orderItems[0]?.image} alt={order.orderItems[0]?.name}
                                         className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-lg"
                                     />
                                 </td>

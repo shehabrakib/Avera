@@ -37,8 +37,6 @@ const OrderConfirmationPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {checkout} = useSelector((state)=>state.checkout)
-
-    console.log(checkout)
     //clear the cart when the order is confirmed
     useEffect(()=>{
         if(checkout && checkout._id){

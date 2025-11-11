@@ -37,6 +37,7 @@ export const updateOrderStatus = createAsyncThunk(
                     },
                 }
             )
+            console.log(response.data)
             return response.data
         } catch (error) {
             console.error(error)
@@ -100,9 +101,9 @@ const adminOrderSlice = createSlice({
             })
             .addCase(updateOrderStatus.fulfilled, (state, action) => {
                 state.loading = false
-                const index = state.orders.findIndex(order => order._id === action.payload._id) 
+                const index = state.orders.findIndex(order => order._id === action.payload.order._id) 
                 if (index !== -1) {
-                    state.orders[index] = action.payload
+                    state.orders[index] = action.payload.order
                 }
             })
             .addCase(updateOrderStatus.rejected, (state, action) => {

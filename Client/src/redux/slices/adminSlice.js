@@ -6,7 +6,6 @@ import axios from "axios";
 export const fetchUsers = createAsyncThunk(
     "admin/fetchUsers",
     async () => {
-       
         const response = await axios.get(
             `${import.meta.env.VITE_BACKEND_URL}/api/admin/users`,
             {
@@ -116,7 +115,7 @@ const adminSlice = createSlice({
             })
             .addCase(updateUser.fulfilled, (state, action) => {
                 state.loading = false
-                const updatedUser = action.payload
+                const updatedUser = action.payload.user
                 const userIndex = state.users.findIndex(user => user._id === updatedUser._id)
                 if (userIndex !== -1) {
                     state.users[userIndex] = updatedUser

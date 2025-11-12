@@ -18,7 +18,6 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 router.post("/", protect, upload.single("image"), async (req, res) => {
-  console.log("rakib")
   try {
     if (!req.file) {
       return res.status(400).json({ message: "No file Uploaded" });
@@ -41,7 +40,6 @@ router.post("/", protect, upload.single("image"), async (req, res) => {
     };
     // call the streamUpload function
     const result = await streamUpload(req.file.buffer);
-
     res.json({ imageUrl: result.secure_url });
   } catch (error) {
     console.log(error);

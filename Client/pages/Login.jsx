@@ -11,7 +11,7 @@ const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
-    const {user, guestId} = useSelector((state)=>state.auth)
+    const {user, guestId, loading} = useSelector((state)=>state.auth)
     const {cart} = useSelector((state)=>state.cart)
 
     //get reirect parameter and check if it is checkout or something
@@ -63,7 +63,7 @@ const Login = () => {
                     </div>
                     <button type="submit" className="w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800
                     transition">
-                        Sign In
+                        {loading ? "loading...":"Sign In"}
                     </button>
                     <p className="mt-6 text-center text-sm">
                         Don't have an account?

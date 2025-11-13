@@ -11,7 +11,7 @@ const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
-    const {user, guestId, loading} = useSelector((state)=>state.auth)
+    const {user, guestId, loading, error} = useSelector((state)=>state.auth)
     const {cart} = useSelector((state)=>state.cart)
 
     //get reirect parameter and check if it is checkout or something
@@ -61,6 +61,9 @@ const Login = () => {
                         placeholder="Enter your password"
                         />
                     </div>
+                    {error && (
+                        <p className="text-red-500 text-sm mb-4 text-center font-semibold bg-red-200">{`${error}!!`}</p>
+                    )}
                     <button type="submit" className="w-full bg-black text-white p-2 rounded-lg font-semibold hover:bg-gray-800
                     transition">
                         {loading ? "loading...":"Sign In"}

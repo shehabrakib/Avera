@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { fetchProductDetails, updateProduct } from "../../src/redux/slices/productsSlice"
 import axios from "axios"
+import { createProduct } from "../../src/redux/slices/adminProductSlice"
 
 const EditProductPage = () => {
   const dispatch = useDispatch()
@@ -71,14 +72,21 @@ const EditProductPage = () => {
   }
   const handleSubmit =(e)=>{
     e.preventDefault()
-    dispatch(updateProduct({id,productData}))
+    // dispatch(updateProduct({id,productData}))
+    if (id) {
+      // Edit mode
+      dispatch(updateProduct({ id, productData }))
+    } else {
+      // Create mode
+      dispatch(createProduct(productData))
+    }
     navigate("/admin/products")
   }
   if(loading) return <p>Loading...</p>
   if(error) return <p>Error: {error}</p>
   return (
     <div className="max-w-5xl mx-auto p-6 shadow-md rounded-md">
-      <h2 className="text-3xl font-bold mb-6">Edit Product</h2>
+      <h2 className="text-3xl font-bold mb-6">{id ? "Edit Product" : "Add New Product"}</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-6">
           <label className="block font-semibold mb-2">Product Name</label>
@@ -193,7 +201,7 @@ const EditProductPage = () => {
           className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600
           transition-colors"
         >
-          Update Product
+          {id ? "Update Product" : "Create Product"}
         </button>
       </form>
     </div>

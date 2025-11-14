@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import StripeButton from "./stripebutton"
+import StripeButton from "./Stripebutton"
 import { useDispatch, useSelector } from "react-redux"
 import { createCheckoutSession } from "../../src/redux/slices/checkoutSlice"
 import axios from "axios"

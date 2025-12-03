@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import menCollectionImage from "../../src/assets/mens-collection.webp"
-import womenCollectionImage from "../../src/assets/womens-collection.webp"
+// import womenCollectionImage from "../../src/assets/womens-collection.webp"
 
 const GenderCollectionSection = () => {
   return (
@@ -8,7 +8,7 @@ const GenderCollectionSection = () => {
         <div className="container mx-auto flex flex-col md:flex-row gap-8">
             <div className="relative flex-1">
                 <img
-                    src={womenCollectionImage}
+                    src="https://picsum.photos/200/300"
                     alt="Women's Collection"
                     className="w-full h-[700px] object-cover"
                 />
